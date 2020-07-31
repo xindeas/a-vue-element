@@ -3,7 +3,7 @@
     <div class="form-content">
       <div class="form-title">{{sysName}}</div>
       <div class="form-body">
-        <el-form :model="form" :size="size" :rules="rules">
+        <el-form ref="form" :model="form" :size="size" :rules="rules">
           <el-form-item prop="userName">
 <!--            <label slot="label">账号</label>-->
             <el-input type="text" prefix-icon="el-icon-user" v-model="form.userName" placeholder="账号/手机号/邮箱"></el-input>
@@ -74,7 +74,18 @@ export default {
   },
   methods: {
     login: function () {
+      this.$post('/user/login', {
+        name: 'a'
+      })
       var vm = this
+
+      let valid = false
+      vm.$refs.form.validate((result, obj) => {
+        valid = result
+      })
+      if (!valid) {
+        return
+      }
       vm.btnLoading = true
       // 后台返回用户账号信息存入session
       setTimeout(() => {
@@ -84,6 +95,7 @@ export default {
           userPic: 'https://dss1.bdstatic.com/70cFvXSh_Q1YnxGkpoWK1HF6hhy/it/u=1091405991,859863778&fm=26&gp=0.jpg',
           name: '张三'
         }
+        // this.$store.commit('permissionList', [菜单数组])
         sessionStorage.setItem('userInfo', JSON.stringify(userInfo))
         vm.$router.push({path: DEFAULT_ROUTER})
       }, 1000)

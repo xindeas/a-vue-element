@@ -28,25 +28,6 @@ const router = new Router({
           path: '/Home',
           name: 'Home',
           component: resolve => require(['@/views/Home'], resolve)
-        },
-        {
-          path: '/User',
-          name: 'User',
-          component: resolve => require(['@/views/User'], resolve)
-        },
-        {
-          path: '/Test1',
-          name: 'Test1',
-          component: resolve => require(['@/views/Test1'], resolve)
-        },
-        {
-          path: '/Test2',
-          name: 'Test2',
-          component: resolve => require(['@/views/Test2'], resolve)
-        },
-        {
-          path: '*',
-          redirect: '/Home'
         }
       ]
     },
@@ -60,6 +41,7 @@ const router = new Router({
 router.beforeEach((to, from, next) => {
   const userInfo = sessionStorage.getItem('userInfo')
   NProgress.start()
+
   if (userInfo || to.path === '/Login') {
     next()
   } else {
@@ -69,6 +51,11 @@ router.beforeEach((to, from, next) => {
 router.afterEach(() => {
   NProgress.done()
 })
+
+router.$addRoutes = (params) => {
+  router.matcher = new Router({mode: 'history'}).matcher
+  router.addRoutes(params)
+}
 
 export default router
 

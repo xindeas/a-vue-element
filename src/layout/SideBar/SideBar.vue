@@ -21,7 +21,7 @@ import {
   Menu
 } from 'element-ui'
 import SideBarItem from './SideBarItem'
-import { SYS_NAME, MENU_LIST, DEFAULT_ROUTER_ITEM } from '@/utils/const.js'
+import { SYS_NAME, DEFAULT_ROUTER_ITEM } from '@/utils/const.js'
 import { addRouters } from '@/utils/util.js'
 export default {
   name: 'SideBar',
@@ -38,8 +38,7 @@ export default {
   data: function () {
     return {
       activeIndex: '1',
-      sysName: SYS_NAME,
-      menuList: MENU_LIST
+      sysName: SYS_NAME
     }
   },
   computed: {
@@ -48,6 +47,9 @@ export default {
         'sys-logo': true,
         'sys-logo-center': this.isCollapse
       }
+    },
+    menuList: function () {
+      return this.$store.state.permissionList
     }
   },
   methods: {

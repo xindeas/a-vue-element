@@ -1,6 +1,6 @@
 # a-vue-element
 
-> 一个 Vue.js + element UI 项目
+> 一个简单的 Vue.js + element UI 框架
 
 ## 开始
 

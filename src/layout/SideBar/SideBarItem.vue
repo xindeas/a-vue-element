@@ -1,5 +1,5 @@
 <template>
-  <el-submenu :index="formItem.path" v-if="formItem.children && formItem.children.length > 0" :popper-append-to-body="false">
+  <el-submenu :index="formItem.path" v-if="formItem.children && formItem.children.length > 0" :popper-append-to-body="appendToBody">
     <template slot="title">
       <i v-if="formItem.icon" :class="formItem.icon"></i>
       <span slot="title">{{formItem.label}}</span>
@@ -32,6 +32,10 @@ export default {
     formItem: {
       type: Object,
       default: () => { return {} }
+    },
+    appendToBody: {
+      type: Boolean,
+      default: false
     }
   },
   data: function () {

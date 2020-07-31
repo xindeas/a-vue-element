@@ -81,6 +81,7 @@ export default {
     width: 100%;
     height: 3em;
     padding: 0.5em 1em;
+    margin-top: 0.5em;
     box-sizing: border-box;
     text-align: center;
     box-shadow: #999 6px 1px 5px 1px;
@@ -93,6 +94,6 @@ export default {
   }
   .main-content {
     width: 100%;
-    height: calc(100% - 7em);
+    height: calc(100% - 7.5em);
   }
 </style>
