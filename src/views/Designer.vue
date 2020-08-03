@@ -28,26 +28,9 @@
           <el-divider content-position="left"><span>路由配置</span></el-divider>
           <el-col :span="8">
             <el-form-item label="最大保留标签数" prop="MAX_TAB_NUM">
-              <el-input-number v-model="form.MAX_TAB_NUM" :precision="0"></el-input-number>
+              <el-input-number v-model="form.MAX_TAB_NUM" :precision="0" :min="2"></el-input-number>
             </el-form-item>
           </el-col>
-<!--          <el-col :span="8">-->
-<!--            <el-form-item label="首页路径" prop="DEFAULT_ROUTER">-->
-<!--              <el-popover-->
-<!--                placement="top-start"-->
-<!--                title="提示"-->
-<!--                width="200"-->
-<!--                trigger="hover">-->
-<!--                '@/views/'目录下的路径，以/开头-->
-<!--                <el-input v-model="form.DEFAULT_ROUTER" slot="reference"></el-input>-->
-<!--              </el-popover>-->
-<!--            </el-form-item>-->
-<!--          </el-col>-->
-<!--          <el-col :span="8">-->
-<!--            <el-form-item label="首页标签名" prop="DEFAULT_ROUTER_ITEM">-->
-<!--              <el-input v-model="form.DEFAULT_ROUTER_ITEM.label"></el-input>-->
-<!--            </el-form-item>-->
-<!--          </el-col>-->
         </el-row>
         <el-row>
           <el-col :xs="24" :sm="24" :md="24" :lg="16" :xl="8">
@@ -88,8 +71,8 @@
                   label="操作"
                   width="180">
                   <template slot-scope="scope">
-                    <el-button type="danger" :disabled="tableData.length<=1" @click="handleDelRow(scope)" :size="form.DEFAULT_COMP_SIZE" plain>删除</el-button>
-                    <el-button type="default" v-if="tableData.length === (scope.$index + 1)" @click="handleAddRow" :size="form.DEFAULT_COMP_SIZE" plain>新增</el-button>
+                    <el-button type="danger" :disabled="tableData.length<=1" @click="handleDelRow(scope, 'tableData')" :size="form.DEFAULT_COMP_SIZE" plain>删除</el-button>
+                    <el-button type="default" v-if="tableData.length === (scope.$index + 1)" @click="handleAddRow('tableData')" :size="form.DEFAULT_COMP_SIZE" plain>新增</el-button>
                   </template>
                 </el-table-column>
               </el-table>
@@ -182,6 +165,75 @@
             show-icon v-else>
           </el-alert>
         </el-collapse-transition>
+
+        <el-row>
+          <el-col :xs="24" :sm="24" :md="24" :lg="16" :xl="16">
+            <el-card class="box-card" shadow="hover">
+              <div slot="header" class="clearfix">
+                <span>头像下拉菜单</span>
+              </div>
+              <el-alert
+                title="这些标签无法被关闭并且常驻标签栏，至少需要保留一个固定标签"
+                type="info"
+                :closable="false"
+                show-icon>
+              </el-alert>
+              <el-table
+                :data="dropList"
+                style="width: 100%">
+                <el-table-column
+                  type="index">
+                </el-table-column>
+                <el-table-column
+                  prop="label"
+                  label="标签名"
+                  width="180">
+                  <template slot-scope="scope">
+                    <el-input v-model="scope.row.label" :size="form.DEFAULT_COMP_SIZE"></el-input>
+                  </template>
+                </el-table-column>
+                <el-table-column
+                  prop="command"
+                  label="指令"
+                  width="180">
+                  <template slot-scope="scope">
+                    <el-input v-model="scope.row.command" :size="form.DEFAULT_COMP_SIZE"></el-input>
+                  </template>
+                </el-table-column>
+                <el-table-column
+                  prop="style"
+                  label="额外样式"
+                  width="180">
+                  <template slot-scope="scope">
+                    <el-input v-model="scope.row.style" :size="form.DEFAULT_COMP_SIZE"></el-input>
+                  </template>
+                </el-table-column>
+                <el-table-column
+                  prop="divided"
+                  label="是否显示分隔线"
+                  width="180">
+                  <template slot-scope="scope">
+                    <el-switch
+                      v-model="scope.row.divided"
+                      inactive-text="否"
+                      active-text="是"
+                      :size="form.DEFAULT_COMP_SIZE">
+                    </el-switch>
+                  </template>
+                </el-table-column>
+                <el-table-column
+                  prop="oper"
+                  label="操作"
+                  width="180">
+                  <template slot-scope="scope">
+                    <el-button type="danger" :disabled="dropList.length<=1" @click="handleDelRow(scope, 'dropList')" :size="form.DEFAULT_COMP_SIZE" plain>删除</el-button>
+                    <el-button type="default" v-if="dropList.length === (scope.$index + 1)" @click="handleAddRow('dropList')" :size="form.DEFAULT_COMP_SIZE" plain>新增</el-button>
+                  </template>
+                </el-table-column>
+              </el-table>
+            </el-card>
+          </el-col>
+        </el-row>
       </el-form>
       <div class="btn-bar">
         <el-button type="success" icon="el-icon-download" @click="exportConfig" plain>导出</el-button>
@@ -287,7 +339,8 @@ export default {
         }],
         usePemission: false,
         curTreeNode: {},
-        tableData: form.DEFAULT_RECENT_ROUTERS
+        tableData: form.DEFAULT_RECENT_ROUTERS,
+        dropList: form.USER_INFO_DROPDOWN
       }
     },
     resetData: function () {
@@ -331,13 +384,39 @@ export default {
       }
       return true
     },
-    handleAddRow: function () {
-      this.tableData.push({})
+    handleAddRow: function (table) {
+      this[table].push({})
     },
-    handleDelRow: function (scope) {
-      this.tableData.splice(scope.$index, 1)
+    handleDelRow: function (scope, table) {
+      this[table].splice(scope.$index, 1)
     },
     exportConfig: function () {
+      const vm = this
+      this.form.DEFAULT_ROUTER = this.form.DEFAULT_RECENT_ROUTERS[0].path
+      this.form.DEFAULT_ROUTER_ITEM = this.form.DEFAULT_RECENT_ROUTERS[0]
+      let text = ''
+      for (let item of Object.keys(this.form)) {
+        text += 'export const ' + item + '='
+        if (typeof this.form[item] === 'string') {
+          text += "'" + this.form[item] + "'"
+        } else if (typeof this.form[item] === 'number') {
+          text += JSON.stringify(this.form[item])
+        } else if (typeof this.form[item] === 'object') {
+          text += JSON.stringify(this.form[item])
+        }
+        text += ' '
+      }
+      this.$copyText(text).then(function (e) {
+        vm.$notify.success({
+          title: '提示',
+          message: '复制成功'
+        })
+      }, function (e) {
+        vm.$notify.error({
+          title: '提示',
+          message: '出错'
+        })
+      })
     }
   }
 }
@@ -358,6 +437,7 @@ export default {
     width: 100%;
   }
   .el-divider span {
+    font-size: 1.5em;
     font-weight: 700;
   }
   .el-card {

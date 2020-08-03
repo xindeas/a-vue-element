@@ -87,8 +87,13 @@ export default {
     command: function (command) {
       switch (command) {
         case 'logout':
+          // 清空账号信息
           sessionStorage.setItem('userInfo', '')
+          // 清空授权菜单列表
           this.$store.commit('permissionList', [])
+          // 刷新，清空路由修改
+          window.location.reload()
+          // 跳转
           this.$router.push('/Login')
           break
         case 'mypage':
