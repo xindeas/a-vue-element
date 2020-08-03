@@ -8,7 +8,7 @@ import { get, post } from '@/utils/server.js'
 // import ElementUI from 'element-ui'
 import 'element-ui/lib/theme-chalk/index.css'
 import VueClipboard from 'vue-clipboard2'
-import { Notification } from 'element-ui'
+import { Notification, MessageBox } from 'element-ui'
 
 VueClipboard.config.autoSetContainer = true // add this line
 Vue.use(VueClipboard)
@@ -20,6 +20,7 @@ Vue.prototype.$store = store
 Vue.prototype.$get = get
 Vue.prototype.$post = post
 Vue.prototype.$notify = Notification
+Vue.prototype.$msgbox = MessageBox
 
 /* eslint-disable no-new */
 new Vue({

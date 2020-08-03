@@ -170,7 +170,7 @@
           <el-col :xs="24" :sm="24" :md="24" :lg="16" :xl="16">
             <el-card class="box-card" shadow="hover">
               <div slot="header" class="clearfix">
-                <span>头像下拉菜单</span>
+                <span>右上角头像下拉菜单</span>
               </div>
               <el-alert
                 title="这些标签无法被关闭并且常驻标签栏，至少需要保留一个固定标签"
@@ -396,7 +396,7 @@ export default {
       this.form.DEFAULT_ROUTER_ITEM = this.form.DEFAULT_RECENT_ROUTERS[0]
       let text = ''
       for (let item of Object.keys(this.form)) {
-        text += 'export const ' + item + '='
+        text += 'export const ' + item + ' = '
         if (typeof this.form[item] === 'string') {
           text += "'" + this.form[item] + "'"
         } else if (typeof this.form[item] === 'number') {
@@ -404,13 +404,15 @@ export default {
         } else if (typeof this.form[item] === 'object') {
           text += JSON.stringify(this.form[item])
         }
-        text += ' '
+        text += '\n'
       }
+      text = text.replace(/"/g, `'`)
+      text = text.replace(/,{/g, `, {`)
+      text = text.replace(/,\[/g, `, [`)
+      text = text.replace(/,'/g, `, '`)
+      text = text.replace(/:/g, `: `)
       this.$copyText(text).then(function (e) {
-        vm.$notify.success({
-          title: '提示',
-          message: '复制成功'
-        })
+        vm.$msgbox.alert(`复制成功,请将内容粘贴覆盖至'@/utils/const.js'`, '提示')
       }, function (e) {
         vm.$notify.error({
           title: '提示',
