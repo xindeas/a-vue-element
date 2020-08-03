@@ -132,7 +132,7 @@
                 </el-alert>
                 <el-tree
                   ref="tree"
-                  node-key="path"
+                  node-key="id"
                   :data="treeData"
                   default-expand-all
                   @node-click="handleNodeClick"
@@ -153,7 +153,7 @@
                   </el-form-item>
                 </el-col>
                 <el-col :span="8">
-                  <el-form-item label="菜单路径" required>
+                  <el-form-item label="菜单路径">
                     <el-input v-model="curTreeNode.path" placeholder="必填项，以' / '开头"></el-input>
                   </el-form-item>
                 </el-col>
@@ -267,7 +267,7 @@ export default {
       this.form.DEFAULT_RECENT_ROUTERS = [val]
     },
     'curTreeNode.path': function (val) {
-      if (!val.startsWith('/')) {
+      if (val && !val.startsWith('/')) {
         this.curTreeNode.path = '/' + val
       }
     }
@@ -307,9 +307,12 @@ export default {
       }
       let data = {
         label: '新增节点',
-        path: '节点路由,唯一值'
+        path: 'newNode',
+        id: 'newNode',
+        parentPaths: this.curTreeNode.paths,
+        paths: this.curTreeNode.paths + ',新增节点'
       }
-      this.$refs.tree.append(data, this.curTreeNode.path)
+      this.$refs.tree.append(data, this.curTreeNode.id)
     },
     removeChild: function () {
       if (!this.curTreeNode.label) {
@@ -317,7 +320,7 @@ export default {
           confirmButtonText: '确定'
         })
       }
-      this.$refs.tree.remove(this.curTreeNode)
+      this.$refs.tree.remove(this.curTreeNode.id)
     },
     allowDrag: function (node) {
       return node.level > 1
