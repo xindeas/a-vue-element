@@ -29,9 +29,12 @@ export default {
     }
   },
   mounted: function () {
+    // 加载固定标签
     const arr = this.recentRouters.filter(item => item.path === this.curRouter)
     if (arr.length > 0) {
-      addRouters(arr[0])
+      for (let item of arr) {
+        addRouters(item)
+      }
     }
   }
 }

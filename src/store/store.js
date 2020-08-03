@@ -1,6 +1,6 @@
 import Vue from 'vue'
 import vuex from 'vuex'
-import { DEFAULT_ROUTER, DEFAULT_RECENT_ROUTERS, DEFAULT_COMP_SIZE, MENU_LIST } from '@/utils/const.js'
+import { DEFAULT_ROUTER, DEFAULT_RECENT_ROUTERS, DEFAULT_COMP_SIZE } from '@/utils/const.js'
 
 Vue.use(vuex)
 
@@ -15,7 +15,9 @@ export default new vuex.Store({
     // 近期路由，深度复制，否则常量内容会被改变
     recentRouters: JSON.parse(JSON.stringify(DEFAULT_RECENT_ROUTERS)),
     // 菜单权限列表
-    permissionList: MENU_LIST
+    permissionList: [],
+    // 面包屑
+    breadcrumb: []
   },
   mutations: {
     size (state, val) {
@@ -32,6 +34,9 @@ export default new vuex.Store({
     },
     permissionList (state, val) {
       state.permissionList = val
+    },
+    breadcrumb (state, val) {
+      state.breadcrumb = val
     }
   },
   actions: {}

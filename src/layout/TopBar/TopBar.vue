@@ -1,7 +1,14 @@
 <template>
   <div class="top-bar">
 <!--    <el-button :class="btnClass" @click="clp"></el-button>-->
-    <i :class="btnClass" @click="clp"></i>
+    <div class="top-bar-left">
+      <i :class="btnClass" @click="clp"></i>
+      <el-breadcrumb separator="/">
+        <template v-for="(item, index) in breadcrumb">
+          <el-breadcrumb-item :key="index">{{item}}</el-breadcrumb-item>
+        </template>
+      </el-breadcrumb>
+    </div>
     <div class="top-bar-right">
       <div class="hello-text">{{helloText}},{{userInfo.name}}</div>
       <el-dropdown @command="command">
@@ -27,7 +34,9 @@ import {
   Avatar,
   Dropdown,
   DropdownItem,
-  DropdownMenu
+  DropdownMenu,
+  Breadcrumb,
+  BreadcrumbItem
 } from 'element-ui'
 import { USER_INFO_DROPDOWN } from '@/utils/const.js'
 import { getHelloText } from '@/utils/util.js'
@@ -38,7 +47,9 @@ export default {
     'el-avatar': Avatar,
     'el-dropdown': Dropdown,
     'el-dropdown-item': DropdownItem,
-    'el-dropdown-menu': DropdownMenu
+    'el-dropdown-menu': DropdownMenu,
+    'el-breadcrumb': Breadcrumb,
+    'el-breadcrumb-item': BreadcrumbItem
   },
   data: function () {
     return {
@@ -48,6 +59,9 @@ export default {
   computed: {
     isCollapse: function () {
       return this.$store.state.menuCollapse
+    },
+    breadcrumb: function () {
+      return this.$store.state.breadcrumb
     },
     btnClass: function () {
       return {
@@ -74,6 +88,7 @@ export default {
       switch (command) {
         case 'logout':
           sessionStorage.setItem('userInfo', '')
+          this.$store.commit('permissionList', [])
           this.$router.push('/Login')
           break
         case 'mypage':
@@ -95,6 +110,17 @@ export default {
     cursor: pointer;
     font-size: 1.5em;
     vertical-align: middle;
+    display: inline-block;
+  }
+  .top-bar-left {
+    display: inline-block;
+    vertical-align: middle;
+  }
+  .top-bar-left i {
+    display: inline-block;
+  }
+  .top-bar-left .el-breadcrumb {
+    margin-left: 1em;
     display: inline-block;
   }
   .top-bar-right {

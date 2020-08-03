@@ -1,26 +1,25 @@
 import axios from 'axios'
 import qs from 'qs'
 
+const baseUrl = process.env.VUE_APP_BASE_URL.endsWith('/') ? process.env.VUE_APP_BASE_URL.slice(0, process.env.VUE_APP_BASE_URL.length - 1) : process.env.VUE_APP_BASE_URL
+
 export function get (url, params) {
-  axios({
+  url = url.startsWith('/') ? url : '/' + url
+  return axios({
     headers: {
       'Content-Type': 'application/json;charset=utf-8'
     },
     method: 'get',
-    url: process.env.VUE_APP_BASE_URL + url,
-    data: qs.stringify(params)
+    url: baseUrl + url,
+    params: params
   })
 }
 
 export function post (url, params) {
-  console.log('VUE_APP_BASE_URL', process.env)
-  console.log('VUE_APP_BASE_URL', process.env.VUE_APP_BASE_URL)
-  axios({
-    headers: {
-      'Content-Type': 'application/json;charset=utf-8'
-    },
+  url = url.startsWith('/') ? url : '/' + url
+  return axios({
     method: 'post',
-    url: process.env.VUE_APP_BASE_URL + url,
+    url: baseUrl + url,
     data: qs.stringify(params)
   })
 }

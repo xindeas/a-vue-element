@@ -154,7 +154,7 @@
                 </el-col>
                 <el-col :span="8">
                   <el-form-item label="菜单路径" required>
-                    <el-input v-model="curTreeNode.path" placeholder="必填项，全菜单唯一，以' / '开头"></el-input>
+                    <el-input v-model="curTreeNode.path" placeholder="必填项，以' / '开头"></el-input>
                   </el-form-item>
                 </el-col>
                 <el-col :span="8">
@@ -162,11 +162,21 @@
                     <el-input v-model="curTreeNode.icon" placeholder="class图标，一级菜单建议必填"></el-input>
                   </el-form-item>
                 </el-col>
+                <el-col :span="8">
+                  <el-form-item label="唯一标识" required>
+                    <el-input v-model="curTreeNode.id" placeholder="唯一标识"></el-input>
+                  </el-form-item>
+                </el-col>
+                <el-col :span="8">
+                  <el-form-item label="打开路径" required>
+                    <el-input v-model="curTreeNode.paths" placeholder="菜单的打开路径，以逗号分隔"></el-input>
+                  </el-form-item>
+                </el-col>
               </el-row>
             </el-col>
           </el-row>
           <el-alert
-            title="区分权限需要在登录后进行角色判断，查询出所有有访问权限的菜单然后给vuex的permissionList赋值，数据格式参考MENU_LIST"
+            title="区分权限需要在router.beforeEach进行角色判断，查询出所有有访问权限的菜单然后给vuex的permissionList赋值，数据格式参考MENU_LIST"
             type="warning"
             :closable="false"
             show-icon v-else>

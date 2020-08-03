@@ -74,9 +74,6 @@ export default {
   },
   methods: {
     login: function () {
-      this.$post('/user/login', {
-        name: 'a'
-      })
       var vm = this
 
       let valid = false
@@ -88,16 +85,30 @@ export default {
       }
       vm.btnLoading = true
       // 后台返回用户账号信息存入session
+
+      // this.$post('/user/login', vm.form).then((res) => {
+      //   vm.btnLoading = false
+      //   const userInfo = {
+      //     userName: vm.form.userName,
+      //     userPic: 'https://dss1.bdstatic.com/70cFvXSh_Q1YnxGkpoWK1HF6hhy/it/u=1091405991,859863778&fm=26&gp=0.jpg',
+      //     name: '张三'
+      //   }
+      //   // this.$store.commit('permissionList', [菜单数组])
+      //   sessionStorage.setItem('userInfo', JSON.stringify(userInfo))
+      //   vm.$router.push({path: DEFAULT_ROUTER})
+      // }, () => {
+      //   vm.btnLoading = false
+      // })
       setTimeout(() => {
-        vm.btnLoading = false
         const userInfo = {
           userName: vm.form.userName,
           userPic: 'https://dss1.bdstatic.com/70cFvXSh_Q1YnxGkpoWK1HF6hhy/it/u=1091405991,859863778&fm=26&gp=0.jpg',
           name: '张三'
         }
-        // this.$store.commit('permissionList', [菜单数组])
         sessionStorage.setItem('userInfo', JSON.stringify(userInfo))
+
         vm.$router.push({path: DEFAULT_ROUTER})
+        vm.btnLoading = false
       }, 1000)
     }
   }

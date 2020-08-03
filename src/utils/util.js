@@ -1,7 +1,6 @@
 import store from '@/store/store.js'
 import router from '@/router'
 import { MAX_TAB_NUM, DEFAULT_ROUTER_ITEM, DEFAULT_RECENT_ROUTERS } from '@/utils/const.js'
-import { Message } from 'element-ui'
 
 // 动态增加标签栏标签并且做页面跳转
 export function addRouters (routeItem) {
@@ -17,9 +16,9 @@ export function addRouters (routeItem) {
   recentRouters = recentRouters.splice(-maxTabNum, maxTabNum)
   recentRouters = DEFAULT_RECENT_ROUTERS.concat(recentRouters)
 
-  addAndRout(routeItem)
   store.commit('curRouter', routeItem.path)
   store.commit('recentRouters', recentRouters)
+  getBreadcrumb(routeItem)
   router.push(routeItem)
 }
 
@@ -41,32 +40,23 @@ export function delRouters (routeItem) {
     curRouter = DEFAULT_ROUTER_ITEM
     recentRouters = [curRouter]
   }
-  addAndRout(curRouter)
-  store.commit('recentRouters', recentRouters)
   store.commit('curRouter', curRouter.path)
+  store.commit('recentRouters', recentRouters)
+  getBreadcrumb(curRouter)
   router.push(curRouter)
 }
-// 动态添加子路由
-function addAndRout (routeItem, callback) {
-  const path = routeItem.path.startsWith('/') ? routeItem.path : '/' + routeItem.path
-  const pathArr = path.split('/')
-  const name = pathArr[pathArr.length - 1]
+
+// 把整个菜单列表加入路由
+export function addMenuList () {
+  const menuList = store.state.permissionList
+  const recentRouters = store.state.recentRouters
+  let result = []
+  result = result.concat(getLeafData(recentRouters))
+  result = result.concat(getLeafData(menuList))
   const data = [{
     path: '/Layout',
     component: resolve => require(['@/layout/Layout'], resolve),
-    children: [
-      {
-        path: path,
-        name: name,
-        component: resolve => require(['@/views' + path], resolve, () => {
-          Message.error({
-            showClose: true,
-            message: '加载出错,页面不存在',
-            type: 'error'
-          })
-        })
-      }
-    ]
+    children: result
   }]
   router.$addRoutes(data)
 }
@@ -85,4 +75,42 @@ export function getHelloText () {
   } else {
     return '你好'
   }
+}
+/** ===============内部私有函数================== **/
+// 取得叶子节点
+function getLeafData (data) {
+  let result = []
+  for (let item of data) {
+    if (item.children && item.children.length > 0) {
+      result = result.concat(getLeafData(item.children))
+    } else {
+      const path = item.path.startsWith('/') ? item.path : '/' + item.path
+      const pathArr = path.split('/')
+      const name = pathArr[pathArr.length - 1]
+      const data = {
+        path: path,
+        name: name,
+        component: resolve => require(['@/views' + path], resolve)
+      }
+      result.push(data)
+    }
+  }
+  return result
+}
+// 获取当前页面完整菜单路径，用于展示面包屑
+function getBreadcrumb (routeItem) {
+  let result = []
+  let recentRouters = store.state.recentRouters
+  if (recentRouters && recentRouters.length > 0) {
+    for (let item of recentRouters) {
+      if (item && item.paths && item.id === routeItem.id) {
+        result = item.paths.split(/[,，]/g)
+      } else if (item && item.path === routeItem.path) {
+        result = [item.label]
+      }
+    }
+    result = [DEFAULT_ROUTER_ITEM.label].concat(result)
+  }
+  store.commit('breadcrumb', result)
+  return result
 }
