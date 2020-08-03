@@ -5,7 +5,7 @@
       <i :class="btnClass" @click="clp"></i>
       <el-breadcrumb separator="/">
         <template v-for="(item, index) in breadcrumb">
-          <el-breadcrumb-item :key="index">{{item}}</el-breadcrumb-item>
+          <el-breadcrumb-item :key="index" v-if="item">{{item}}</el-breadcrumb-item>
         </template>
       </el-breadcrumb>
     </div>

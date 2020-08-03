@@ -3,7 +3,7 @@ import Router from 'vue-router'
 import NProgress from 'nprogress'
 import 'nprogress/nprogress.css'
 import store from '@/store/store.js'
-import { addMenuList } from '@/utils/util.js'
+import { addWithoutPush, addMenuList } from '@/utils/util.js'
 import { MENU_LIST } from '@/utils/const.js'
 
 Vue.use(Router)
@@ -12,13 +12,13 @@ const router = new Router({
   routes: [
     {
       path: '/',
-      redirect: '/Login'
+      redirect: '/Home'
     },
     {
       path: '/Login',
       name: 'Login',
       component: resolve => require(['@/layout/Login'], resolve)
-    },
+    }
     // {
     //   path: '/Layout',
     //   component: resolve => require(['@/layout/Layout'], resolve),
@@ -30,14 +30,13 @@ const router = new Router({
     //     {
     //       path: '/Home',
     //       name: 'Home',
+    //       meta: {
+    //         label: '主页'
+    //       },
     //       component: resolve => require(['@/views/Home'], resolve)
     //     }
     //   ]
-    // },
-    {
-      path: '*',
-      redirect: '/Login'
-    }
+    // }
   ]
 })
 
@@ -49,17 +48,27 @@ router.beforeEach((to, from, next) => {
   if ((!permissionList || permissionList.length <= 0) && userInfo) {
     store.commit('permissionList', MENU_LIST)
     addMenuList()
-    next()
+    next(to)
   } else {
     if (userInfo || to.path === '/Login') {
+      if (to.meta.label) {
+        let item = {
+          label: to.meta.label,
+          path: to.path
+        }
+        addWithoutPush(item)
+      }
       next()
     } else {
       next({path: '/Login'})
     }
   }
 })
-router.afterEach(() => {
+router.afterEach((to, from, next) => {
   NProgress.done()
+  if (to.meta.breadcrumb) {
+    store.commit('breadcrumb', to.meta.breadcrumb.split(/[,，]/g))
+  }
 })
 
 router.$addRoutes = (params) => {

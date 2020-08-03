@@ -4,6 +4,11 @@ import { MAX_TAB_NUM, DEFAULT_ROUTER_ITEM, DEFAULT_RECENT_ROUTERS } from '@/util
 
 // 动态增加标签栏标签并且做页面跳转
 export function addRouters (routeItem) {
+  addWithoutPush(routeItem)
+  router.push(routeItem)
+}
+
+export function addWithoutPush (routeItem) {
   let maxTabNum = MAX_TAB_NUM - DEFAULT_RECENT_ROUTERS.length
   maxTabNum = maxTabNum > 0 ? maxTabNum : 1
   let recentRouters = store.state.recentRouters
@@ -18,8 +23,6 @@ export function addRouters (routeItem) {
 
   store.commit('curRouter', routeItem.path)
   store.commit('recentRouters', recentRouters)
-  getBreadcrumb(routeItem)
-  router.push(routeItem)
 }
 
 // 动态删除标签栏标签并且做页面跳转
@@ -42,7 +45,6 @@ export function delRouters (routeItem) {
   }
   store.commit('curRouter', curRouter.path)
   store.commit('recentRouters', recentRouters)
-  getBreadcrumb(curRouter)
   router.push(curRouter)
 }
 
@@ -90,27 +92,14 @@ function getLeafData (data) {
       const data = {
         path: path,
         name: name,
+        meta: {
+          label: item.label,
+          breadcrumb: item.paths || item.label
+        },
         component: resolve => require(['@/views' + path], resolve)
       }
       result.push(data)
     }
   }
-  return result
-}
-// 获取当前页面完整菜单路径，用于展示面包屑
-function getBreadcrumb (routeItem) {
-  let result = []
-  let recentRouters = store.state.recentRouters
-  if (recentRouters && recentRouters.length > 0) {
-    for (let item of recentRouters) {
-      if (item && item.paths && item.id === routeItem.id) {
-        result = item.paths.split(/[,，]/g)
-      } else if (item && item.path === routeItem.path) {
-        result = [item.label]
-      }
-    }
-    result = [DEFAULT_ROUTER_ITEM.label].concat(result)
-  }
-  store.commit('breadcrumb', result)
   return result
 }
