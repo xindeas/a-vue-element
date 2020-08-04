@@ -37,6 +37,14 @@ export const MENU_LIST = [
         label: '测试一',
         id: '1002',
         paths: '菜单一,测试一',
+        children: [
+          {
+            label: '测试一一',
+            id: '1002001',
+            paths: '菜单一,测试一,测试一一',
+            path: '/Test1'
+          }
+        ],
         path: '/Test1'
       },
       {
