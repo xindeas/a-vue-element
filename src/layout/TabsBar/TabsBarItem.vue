@@ -1,5 +1,5 @@
 <template>
-  <div :class="item.path === curRouter ? 'tab-item cur-tab' : 'tab-item'" @click="jumpTo(item)">
+  <div :class="tabClass" @click="jumpTo(item)">
             <span>
               {{item.label}}
               <i v-if="closeAble" @click.stop="closeTab(item)" class="el-icon-close"></i>
@@ -37,6 +37,12 @@ export default {
       // 只有不在默认标签页的标签才能关闭
       const arr = DEFAULT_RECENT_ROUTERS.filter(item => item.path === this.item.path)
       return arr.length <= 0
+    },
+    tabClass: function () {
+      return {
+        'tab-item': true,
+        'cur-tab': this.item.path === this.curRouter
+      }
     }
   },
   methods: {
