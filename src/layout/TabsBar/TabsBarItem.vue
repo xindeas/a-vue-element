@@ -1,10 +1,12 @@
 <template>
-  <div :class="tabClass" @click="jumpTo(item)">
+  <transition name="el-zoom-in-bottom">
+    <div :class="tabClass" @click="jumpTo(item)">
             <span>
               {{item.label}}
               <i v-if="closeAble" @click.stop="closeTab(item)" class="el-icon-close"></i>
             </span>
-  </div>
+    </div>
+  </transition>
 </template>
 
 <script>
