@@ -120,13 +120,22 @@ export default {
   .top-bar-left {
     display: inline-block;
     vertical-align: middle;
+    height: 100%;
+  }
+  .top-bar-left:after {
+    content: '';
+    display: inline-block;
+    vertical-align: middle;
+    height: 100%;
   }
   .top-bar-left i {
     display: inline-block;
+    vertical-align: middle;
   }
   .top-bar-left .el-breadcrumb {
     margin-left: 1em;
     display: inline-block;
+    vertical-align: middle;
   }
   .top-bar-right {
     position: absolute;

@@ -139,12 +139,13 @@ export default {
     font-weight: bold;
     text-align: center;
     margin-bottom: 1em;
+    font-family: Font001;
   }
   .form-footer {
     color: #999;
     text-align: center;
     margin-top: 1em;
-    font-size: 0.8em;
+    font-family: Font002;
   }
   .el-form-item label {
     color: white;

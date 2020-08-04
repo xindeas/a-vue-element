@@ -15,5 +15,6 @@ export default {
     display: inline-block;
     vertical-align: middle;
     color: #999;
+    font-family: Font002;
   }
 </style>
