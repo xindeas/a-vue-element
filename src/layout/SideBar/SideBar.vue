@@ -1,5 +1,5 @@
 <template>
-  <transition name="el-zoom-in-center">
+  <transition name="el-zoom-in-left">
     <el-menu
       default-active="2"
       :collapse="isCollapse"
