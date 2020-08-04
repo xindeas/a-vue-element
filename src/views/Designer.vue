@@ -167,6 +167,7 @@
         </el-collapse-transition>
 
         <el-row>
+          <el-divider content-position="left"><span>用户菜单配置</span></el-divider>
           <el-col :xs="24" :sm="24" :md="24" :lg="16" :xl="16">
             <el-card class="box-card" shadow="hover">
               <div slot="header" class="clearfix">
@@ -354,7 +355,7 @@ export default {
     },
     addChild: function () {
       if (!this.curTreeNode.label) {
-        MessageBox.alert('请选择节点', '提示', {
+        return MessageBox.alert('请选择节点', '提示', {
           confirmButtonText: '确定'
         })
       }
@@ -369,7 +370,7 @@ export default {
     },
     removeChild: function () {
       if (!this.curTreeNode.label) {
-        MessageBox.alert('请选择节点', '提示', {
+        return MessageBox.alert('请选择节点', '提示', {
           confirmButtonText: '确定'
         })
       }

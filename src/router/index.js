@@ -45,7 +45,9 @@ router.beforeEach((to, from, next) => {
   NProgress.start()
 
   const permissionList = store.state.permissionList
+  // 判断是否已登录，并且菜单权限列表为空
   if ((!permissionList || permissionList.length <= 0) && userInfo) {
+    // 此处访问后台获取权限，返回值存放至permissionList
     store.commit('permissionList', MENU_LIST)
     addMenuList()
     next(to)
