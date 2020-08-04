@@ -66,9 +66,9 @@ export function addMenuList () {
 export function getHelloText () {
   const date = new Date()
   const hour = date.getHours()
-  if (hour >= 0 && hour <= 11) {
+  if (hour >= 0 && hour <= 10) {
     return '早上好'
-  } else if (hour > 11 && hour <= 13) {
+  } else if (hour > 10 && hour <= 13) {
     return '中午好'
   } else if (hour > 13 && hour <= 18) {
     return '下午好'
