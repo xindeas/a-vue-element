@@ -59,6 +59,9 @@ export function addMenuList () {
     path: '/Layout',
     component: resolve => require(['@/layout/Layout'], resolve),
     children: result
+  }, {
+    path: '*',
+    redirect: recentRouters[0].path
   }]
   router.$addRoutes(data)
 }
