@@ -2,7 +2,7 @@
     <div class="designer">
       <el-form ref="form" :model="form" :rules="rules" label-width="auto" :size="form.DEFAULT_COMP_SIZE">
         <el-alert
-          title="本配置中所有路径配置均是存在'@/views/'目录之下，如有特殊要求可以前往'@/utils/util.js'修改"
+          title="本配置中所有路由、菜单的路径配置均是存在'@/views/'目录之下，如有特殊要求可以前往'@/utils/util.js'修改"
           type="warning"
           :closable="false"
           show-icon>
