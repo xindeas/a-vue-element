@@ -2,7 +2,7 @@
     <div class="designer">
       <el-form ref="form" :model="form" :rules="rules" label-width="auto" :size="form.DEFAULT_COMP_SIZE">
         <el-alert
-          title="本配置中所有路由、菜单的路径配置均是存在'@/views/'目录之下，如有特殊要求可以前往'@/utils/util.js'修改"
+          title="本配置中所有路由、菜单的路径配置均是存在'@/views/'目录之下，如有特殊要求可以修改‘基础配置’下的‘菜单页面存放目录’一项"
           type="warning"
           :closable="false"
           show-icon>
@@ -22,6 +22,13 @@
                 <el-option label="mini" value="mini"></el-option>
               </el-select>
             </el-form-item>
+          </el-col>
+          <el-col :span="8">
+            <el-tooltip effect="dark" content="项目文件src下的目录，如填写‘views’代表菜单文件存放在src下的views文件夹下">
+              <el-form-item label="菜单页面存放目录" prop="VIEW_PATH">
+                <el-input v-model="form.VIEW_PATH"></el-input>
+              </el-form-item>
+            </el-tooltip>
           </el-col>
         </el-row>
         <el-row>
@@ -269,7 +276,8 @@ import {
   Popover,
   Table,
   TableColumn,
-  MessageBox
+  MessageBox,
+  Tooltip
 } from 'element-ui'
 import * as cons from '@/utils/const.js'
 export default {
@@ -293,7 +301,8 @@ export default {
     'el-popover': Popover,
     'el-table': Table,
     'el-table-column': TableColumn,
-    'el-collapse-transition': CollapseTransition
+    'el-collapse-transition': CollapseTransition,
+    'el-tooltip': Tooltip
   },
   data: function () {
     return this.defaultData()

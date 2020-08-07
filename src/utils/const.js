@@ -1,5 +1,13 @@
+/** ===============基础配置================== **/
 // 系统名称
 export const SYS_NAME = '某管理系统'
+// 默认组件大小对应element组件大小可选值：medium / small / mini
+export const DEFAULT_COMP_SIZE = 'mini'
+// 菜单页面存放目录
+export const VIEW_PATH = 'views'
+/** ===============路由配置================== **/
+// 标签栏保留最大标签数
+export const MAX_TAB_NUM = 5
 // 路由默认路径(首页路径)，初次打开系统展示的页面的路由
 export const DEFAULT_ROUTER = '/Home'
 // 默认路由标签页，初次打开系统展示的页面
@@ -7,10 +15,11 @@ export const DEFAULT_ROUTER_ITEM = {
   path: DEFAULT_ROUTER,
   label: '主页'
 }
-// 默认路由标签页，默认展示且不能被关闭
+// 标签栏固定标签页，默认展示且不能被关闭
 export const DEFAULT_RECENT_ROUTERS = [
   DEFAULT_ROUTER_ITEM
 ]
+/** ===============菜单权限配置================== **/
 // 左侧菜单列表，如果需要根据权限展示不同菜单，该项设为[]，并且在router.beforeEach从后台取菜单数据并依照格式存入vuex的permissionList中
 export const MENU_LIST = [
   // {
@@ -63,6 +72,7 @@ export const MENU_LIST = [
     paths: '设计器'
   }
 ]
+/** ===============用户菜单配置================== **/
 // 右上角用户头像下拉菜单
 export const USER_INFO_DROPDOWN = [
   // {
@@ -86,7 +96,3 @@ export const USER_INFO_DROPDOWN = [
     style: 'color: #F56C6C;'
   }
 ]
-// 标签栏保留最大标签数
-export const MAX_TAB_NUM = 5
-// 默认组件大小对应element组件大小可选值：medium / small / mini
-export const DEFAULT_COMP_SIZE = 'mini'

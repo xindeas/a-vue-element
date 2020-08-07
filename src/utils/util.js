@@ -1,6 +1,6 @@
 import store from '@/store/store.js'
 import router from '@/router'
-import { MAX_TAB_NUM, DEFAULT_ROUTER_ITEM, DEFAULT_RECENT_ROUTERS } from '@/utils/const.js'
+import { MAX_TAB_NUM, DEFAULT_ROUTER_ITEM, DEFAULT_RECENT_ROUTERS, VIEW_PATH } from '@/utils/const.js'
 
 // 动态增加标签栏标签并且做页面跳转
 export function addRouters (routeItem) {
@@ -86,10 +86,12 @@ export function getHelloText () {
 function getLeafData (data) {
   let result = []
   for (let item of data) {
+    let basePath = VIEW_PATH.startsWith('/') ? VIEW_PATH.slice(1, VIEW_PATH.length) : VIEW_PATH
+    basePath = basePath.endsWith('/') ? basePath.slice(0, basePath.length - 1) : basePath
     if (item.children && item.children.length > 0) {
       result = result.concat(getLeafData(item.children))
     } else {
-      const path = item.path.startsWith('/') ? item.path : '/' + item.path
+      let path = item.path.startsWith('/') ? item.path : '/' + item.path
       const pathArr = path.split('/')
       const name = pathArr[pathArr.length - 1]
       const data = {
@@ -99,7 +101,7 @@ function getLeafData (data) {
           label: item.label,
           breadcrumb: item.paths || item.label
         },
-        component: resolve => require(['@/views' + path], resolve)
+        component: resolve => require(['@/' + basePath + path], resolve)
       }
       result.push(data)
     }
