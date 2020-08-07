@@ -40,7 +40,7 @@
           </el-col>
         </el-row>
         <el-row>
-          <el-col :xs="24" :sm="24" :md="24" :lg="16" :xl="8">
+          <el-col :xs="24" :sm="24" :md="24" :lg="16" :xl="10">
             <el-card class="box-card" shadow="hover">
               <div slot="header" class="clearfix">
                 <span>标签栏固定标签</span>
@@ -257,27 +257,27 @@
 
 <script>
 import {
+  Alert,
+  Button,
+  Card,
+  Col,
+  CollapseTransition,
+  Divider,
   Form,
   FormItem,
   Input,
   InputNumber,
-  Button,
-  Select,
   Option,
-  Row,
-  Col,
-  Divider,
-  Switch,
-  Tree,
-  Card,
-  Alert,
-  CollapseTransition,
   Popconfirm,
   Popover,
+  Row,
+  Select,
+  Switch,
   Table,
   TableColumn,
-  MessageBox,
-  Tooltip
+  Tree,
+  Tooltip,
+  MessageBox
 } from 'element-ui'
 import * as cons from '@/utils/const.js'
 export default {
@@ -458,5 +458,8 @@ export default {
   .btn-bar {
     text-align: center;
     margin-top: 1em;
+  }
+  .el-table {
+    overflow: auto;
   }
 </style>
