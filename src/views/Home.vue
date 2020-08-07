@@ -1,11 +1,13 @@
 <template>
 <div class="logo-cotent">
-  <div class="logo">
-    <div class="font001 chen">沉</div>
-    <div class="font002 xindeas">Xindeas</div>
-    <div class="font001 zhou">舟</div>
+  <div class="lg">
+    <div class="logo">
+      <div class="font001 chen">沉</div>
+      <div class="font002 xindeas">Xindeas</div>
+      <div class="font001 zhou">舟</div>
+    </div>
+    <div class="font001 tip">势如破竹，志若沉舟</div>
   </div>
-  <div class="font001 tip">势如破竹，志若沉舟</div>
 </div>
 </template>
 
@@ -17,16 +19,25 @@ export default {
 
 <style scoped>
   .logo-cotent {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
+    display: inline-block;
+    vertical-align: middle;
+    text-align: center;
     width: 100%;
     height: 100%;
     overflow-y: auto;
     box-sizing: border-box;
     padding: 1em;
-    flex-wrap: wrap;
+  }
+  .logo-cotent:after {
+    content: '';
+    display: inline-block;
+    vertical-align: middle;
+    height: 100%;
+  }
+  .lg {
+    width: 100%;
+    display: inline-block;
+    vertical-align: middle;
   }
   .logo {
     border-radius: 50%;
@@ -34,6 +45,8 @@ export default {
     width: 12em;
     height: 12em;
     position: relative;
+    display: inline-block;
+    vertical-align: middle;
   }
   .font001 {
     font-family: Font001;
@@ -63,5 +76,8 @@ export default {
   }
   .tip {
     margin-top: 1em;
+    display: inline-block;
+    vertical-align: middle;
+    width: 100%;
   }
 </style>
