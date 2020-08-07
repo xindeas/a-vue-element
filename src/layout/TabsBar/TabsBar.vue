@@ -1,11 +1,9 @@
 <template>
-  <div class="tabs-bar">
     <draggable v-model="recentRouters" class="tabs-bar">
       <template v-for="(item, index) in recentRouters">
         <TabsBarItem :key="index" :item="item"></TabsBarItem>
       </template>
     </draggable>
-  </div>
 </template>
 
 <script>
@@ -41,9 +39,4 @@ export default {
 </script>
 
 <style scoped>
-  .tabs-bar {
-    height: 2.5em;
-    background-color: #f5f7fa;
-    border: 1px solid #e4e7ed;
-  }
 </style>

@@ -18,6 +18,12 @@ export default {
 <style scoped>
   .my-content {
     width: 100%;
-    height: calc(100% - 2.5em);
+    height: calc(100% - 2.5em - 0.2em);
+  }
+  .tabs-bar {
+    margin-bottom: 0.2em;
+    height: 2.5em;
+    background-color: #f5f7fa;
+    border: 1px solid #e4e7ed;
   }
 </style>
