@@ -11,8 +11,10 @@
     "build": "node build/build.js"
   },
   "dependencies": {
+    "@types/intro.js": "^2.4.7",
     "axios": "^0.19.2",
     "element-ui": "^2.13.2",
+    "intro.js": "^2.9.3",
     "nprogress": "^0.2.0",
     "vue": "^2.5.2",
     "vue-clipboard2": "^0.3.1",

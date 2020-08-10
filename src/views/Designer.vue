@@ -7,7 +7,7 @@
           :closable="false"
           show-icon>
         </el-alert>
-        <el-row>
+        <el-row data-step="4" data-intro="框架基础配置!">
           <el-divider content-position="left"><span>基础配置</span></el-divider>
           <el-col :span="8">
             <el-form-item label="系统名称" prop="SYS_NAME">
@@ -31,149 +31,153 @@
             </el-tooltip>
           </el-col>
         </el-row>
-        <el-row>
-          <el-divider content-position="left"><span>路由配置</span></el-divider>
-          <el-col :span="8">
-            <el-form-item label="最大保留标签数" prop="MAX_TAB_NUM">
-              <el-input-number v-model="form.MAX_TAB_NUM" :precision="0" :min="2"></el-input-number>
-            </el-form-item>
-          </el-col>
-        </el-row>
-        <el-row>
-          <el-col :xs="24" :sm="24" :md="24" :lg="16" :xl="10">
-            <el-card class="box-card" shadow="hover">
-              <div slot="header" class="clearfix">
-                <span>标签栏固定标签</span>
-              </div>
-              <el-alert
-                title="这些标签无法被关闭并且常驻标签栏，至少需要保留一个固定标签"
-                type="info"
-                :closable="false"
-                show-icon>
-              </el-alert>
-              <el-table
-                :data="tableData"
-                style="width: 100%">
-                <el-table-column
-                  type="index">
-                </el-table-column>
-                <el-table-column
-                  prop="label"
-                  label="标签名"
-                  width="180">
-                  <template slot-scope="scope">
-                    <el-input v-model="scope.row.label" :size="form.DEFAULT_COMP_SIZE"></el-input>
-                  </template>
-                </el-table-column>
-                <el-table-column
-                  prop="path"
-                  label="路由"
-                  width="180">
-                  <template slot-scope="scope">
-                    <el-input v-model="scope.row.path" :size="form.DEFAULT_COMP_SIZE"></el-input>
-                  </template>
-                </el-table-column>
-                <el-table-column
-                  prop="oper"
-                  label="操作"
-                  width="180">
-                  <template slot-scope="scope">
-                    <el-button type="danger" :disabled="tableData.length<=1" @click="handleDelRow(scope, 'tableData')" :size="form.DEFAULT_COMP_SIZE" plain>删除</el-button>
-                    <el-button type="default" v-if="tableData.length === (scope.$index + 1)" @click="handleAddRow('tableData')" :size="form.DEFAULT_COMP_SIZE" plain>新增</el-button>
-                  </template>
-                </el-table-column>
-              </el-table>
-            </el-card>
-          </el-col>
-        </el-row>
-        <el-row>
-          <el-divider content-position="left"><span>菜单权限配置</span></el-divider>
-          <el-col :span="8">
-            <el-form-item label="是否区分权限">
-              <el-switch
-                v-model="usePemission"
-                inactive-text="不区分权限"
-                active-text="区分权限">
-              </el-switch>
-            </el-form-item>
-          </el-col>
-        </el-row>
-        <el-collapse-transition>
-          <el-row v-if="!usePemission">
-            <el-col :xs="24" :sm="24" :md="24" :lg="8" :xl="8">
+        <el-row data-step="5" data-intro="路由配置只包含标签栏同时存在数和固定标签!">
+          <el-row>
+            <el-divider content-position="left"><span>路由配置</span></el-divider>
+            <el-col :span="8">
+              <el-form-item label="最大保留标签数" prop="MAX_TAB_NUM">
+                <el-input-number v-model="form.MAX_TAB_NUM" :precision="0" :min="2"></el-input-number>
+              </el-form-item>
+            </el-col>
+          </el-row>
+          <el-row>
+            <el-col :xs="24" :sm="24" :md="24" :lg="16" :xl="10">
               <el-card class="box-card" shadow="hover">
                 <div slot="header" class="clearfix">
-                  <span>菜单列表</span>
-                  <div style="float: right;">
-                    <el-button type="default" @click="addChild" :size="form.DEFAULT_COMP_SIZE" plain>添加子节点</el-button>
-                    <el-popconfirm
-                      title="确定删除吗？"
-                      @onConfirm="removeChild"
-                    >
-                      <el-button slot="reference" type="danger" :size="form.DEFAULT_COMP_SIZE" plain>删除</el-button>
-                    </el-popconfirm>
-                  </div>
+                  <span>标签栏固定标签</span>
                 </div>
                 <el-alert
-                  title="拖拽以进行排序，只允许同层拖拽"
+                  title="这些标签无法被关闭并且常驻标签栏，至少需要保留一个固定标签"
                   type="info"
                   :closable="false"
                   show-icon>
                 </el-alert>
-                <el-tree
-                  ref="tree"
-                  node-key="id"
-                  :data="treeData"
-                  default-expand-all
-                  @node-click="handleNodeClick"
-                  :allow-drag="allowDrag"
-                  :allow-drop="allowDrop"
-                  :expand-on-click-node="false"
-                  highlight-current
-                  draggable
-                  accordion></el-tree>
+                <el-table
+                  :data="tableData"
+                  style="width: 100%">
+                  <el-table-column
+                    type="index">
+                  </el-table-column>
+                  <el-table-column
+                    prop="label"
+                    label="标签名"
+                    width="180">
+                    <template slot-scope="scope">
+                      <el-input v-model="scope.row.label" :size="form.DEFAULT_COMP_SIZE"></el-input>
+                    </template>
+                  </el-table-column>
+                  <el-table-column
+                    prop="path"
+                    label="路由"
+                    width="180">
+                    <template slot-scope="scope">
+                      <el-input v-model="scope.row.path" :size="form.DEFAULT_COMP_SIZE"></el-input>
+                    </template>
+                  </el-table-column>
+                  <el-table-column
+                    prop="oper"
+                    label="操作"
+                    width="180">
+                    <template slot-scope="scope">
+                      <el-button type="danger" :disabled="tableData.length<=1" @click="handleDelRow(scope, 'tableData')" :size="form.DEFAULT_COMP_SIZE" plain>删除</el-button>
+                      <el-button type="default" v-if="tableData.length === (scope.$index + 1)" @click="handleAddRow('tableData')" :size="form.DEFAULT_COMP_SIZE" plain>新增</el-button>
+                    </template>
+                  </el-table-column>
+                </el-table>
               </el-card>
             </el-col>
-            <el-col :xs="24" :sm="24" :md="24" :lg="16" :xl="16" v-if="curTreeNode.label || curTreeNode.path">
-              <el-row>
-                <el-divider content-position="left"><span>当前菜单</span></el-divider>
-                <el-col :span="8">
-                  <el-form-item label="菜单名称" required>
-                    <el-input v-model="curTreeNode.label" placeholder="必填项"></el-input>
-                  </el-form-item>
-                </el-col>
-                <el-col :span="8">
-                  <el-form-item label="菜单路径">
-                    <el-input v-model="curTreeNode.path" placeholder="必填项，以' / '开头"></el-input>
-                  </el-form-item>
-                </el-col>
-                <el-col :span="8">
-                  <el-form-item label="菜单图标">
-                    <el-input v-model="curTreeNode.icon" placeholder="class图标，一级菜单建议必填"></el-input>
-                  </el-form-item>
-                </el-col>
-                <el-col :span="8">
-                  <el-form-item label="唯一标识" required>
-                    <el-input v-model="curTreeNode.id" placeholder="唯一标识"></el-input>
-                  </el-form-item>
-                </el-col>
-                <el-col :span="8">
-                  <el-form-item label="打开路径" required>
-                    <el-input v-model="curTreeNode.paths" placeholder="菜单的打开路径，以逗号分隔"></el-input>
-                  </el-form-item>
-                </el-col>
-              </el-row>
+          </el-row>
+        </el-row>
+        <el-row data-step="6" data-intro="相当重要的一个配置，控制进入系统时左侧菜单内容!">
+          <el-row>
+            <el-divider content-position="left"><span>菜单权限配置</span></el-divider>
+            <el-col :span="8">
+              <el-form-item label="是否区分权限">
+                <el-switch
+                  v-model="usePemission"
+                  inactive-text="不区分权限"
+                  active-text="区分权限">
+                </el-switch>
+              </el-form-item>
             </el-col>
           </el-row>
-          <el-alert
-            title="区分权限需要在router.beforeEach进行角色判断，查询出所有有访问权限的菜单然后给vuex的permissionList赋值，数据格式参考MENU_LIST"
-            type="warning"
-            :closable="false"
-            show-icon v-else>
-          </el-alert>
-        </el-collapse-transition>
+          <el-collapse-transition>
+            <el-row v-if="!usePemission">
+              <el-col :xs="24" :sm="24" :md="24" :lg="8" :xl="8">
+                <el-card class="box-card" shadow="hover">
+                  <div slot="header" class="clearfix">
+                    <span>菜单列表</span>
+                    <div style="float: right;">
+                      <el-button type="default" @click="addChild" :size="form.DEFAULT_COMP_SIZE" plain>添加子节点</el-button>
+                      <el-popconfirm
+                        title="确定删除吗？"
+                        @onConfirm="removeChild"
+                      >
+                        <el-button slot="reference" type="danger" :size="form.DEFAULT_COMP_SIZE" plain>删除</el-button>
+                      </el-popconfirm>
+                    </div>
+                  </div>
+                  <el-alert
+                    title="拖拽以进行排序，只允许同层拖拽"
+                    type="info"
+                    :closable="false"
+                    show-icon>
+                  </el-alert>
+                  <el-tree
+                    ref="tree"
+                    node-key="id"
+                    :data="treeData"
+                    default-expand-all
+                    @node-click="handleNodeClick"
+                    :allow-drag="allowDrag"
+                    :allow-drop="allowDrop"
+                    :expand-on-click-node="false"
+                    highlight-current
+                    draggable
+                    accordion></el-tree>
+                </el-card>
+              </el-col>
+              <el-col :xs="24" :sm="24" :md="24" :lg="16" :xl="16" v-if="curTreeNode.label || curTreeNode.path">
+                <el-row>
+                  <el-divider content-position="left"><span>当前菜单</span></el-divider>
+                  <el-col :span="8">
+                    <el-form-item label="菜单名称" required>
+                      <el-input v-model="curTreeNode.label" placeholder="必填项"></el-input>
+                    </el-form-item>
+                  </el-col>
+                  <el-col :span="8">
+                    <el-form-item label="菜单路径">
+                      <el-input v-model="curTreeNode.path" placeholder="必填项，以' / '开头"></el-input>
+                    </el-form-item>
+                  </el-col>
+                  <el-col :span="8">
+                    <el-form-item label="菜单图标">
+                      <el-input v-model="curTreeNode.icon" placeholder="class图标，一级菜单建议必填"></el-input>
+                    </el-form-item>
+                  </el-col>
+                  <el-col :span="8">
+                    <el-form-item label="唯一标识" required>
+                      <el-input v-model="curTreeNode.id" placeholder="唯一标识"></el-input>
+                    </el-form-item>
+                  </el-col>
+                  <el-col :span="8">
+                    <el-form-item label="打开路径" required>
+                      <el-input v-model="curTreeNode.paths" placeholder="菜单的打开路径，以逗号分隔"></el-input>
+                    </el-form-item>
+                  </el-col>
+                </el-row>
+              </el-col>
+            </el-row>
+            <el-alert
+              title="区分权限需要在router.beforeEach进行角色判断，查询出所有有访问权限的菜单然后给vuex的permissionList赋值，数据格式参考MENU_LIST"
+              type="warning"
+              :closable="false"
+              show-icon v-else>
+            </el-alert>
+          </el-collapse-transition>
+        </el-row>
 
-        <el-row>
+        <el-row data-step="7" data-intro="右上角点击用户头像下拉的菜单配置">
           <el-divider content-position="left"><span>用户菜单配置</span></el-divider>
           <el-col :xs="24" :sm="24" :md="24" :lg="16" :xl="16">
             <el-card class="box-card" shadow="hover">
@@ -244,12 +248,13 @@
         </el-row>
       </el-form>
       <div class="btn-bar">
-        <el-button type="success" icon="el-icon-download" @click="exportConfig" plain>导出</el-button>
+        <el-button icon="el-icon-search" @click="guide" data-step="1" data-intro="欢迎进入引导页，下次可以从这里打开引导页!">打开引导</el-button>
+        <el-button type="success" icon="el-icon-download" @click="exportConfig" plain data-step="2" data-intro="这是导出按钮，配置完成后点击导出按钮将配置复制粘贴到const.js上!">导出</el-button>
         <el-popconfirm
           title="确定还原吗？"
           @onConfirm="resetData"
         >
-          <el-button slot="reference" type="danger" icon="el-icon-refresh" plain>还原</el-button>
+          <el-button slot="reference" type="danger" icon="el-icon-refresh" plain data-step="3" data-intro="还原表单!">还原</el-button>
         </el-popconfirm>
       </div>
     </div>
@@ -279,6 +284,8 @@ import {
   Tooltip,
   MessageBox
 } from 'element-ui'
+import { introJs } from 'intro.js'
+import 'intro.js/introjs.css'
 import * as cons from '@/utils/const.js'
 export default {
   name: 'Designer',
@@ -335,8 +342,21 @@ export default {
     }
   },
   mounted: function () {
+    this.guide()
   },
   methods: {
+    guide: function () {
+      introJs().setOptions({
+        prevLabel: '上一步',
+        nextLabel: '下一步',
+        skipLabel: '跳过',
+        doneLabel: '结束'
+      }).oncomplete(function () {
+        // 点击跳过按钮后执行的事件
+      }).onexit(function () {
+        // 点击结束按钮后， 执行的事件
+      }).start()
+    },
     defaultData: function () {
       const form = JSON.parse(JSON.stringify(cons))
       return {
