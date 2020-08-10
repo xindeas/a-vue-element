@@ -84,32 +84,22 @@ export default {
         return
       }
       vm.btnLoading = true
-      // 后台返回用户账号信息存入session
 
-      // this.$post('/user/login', vm.form).then((res) => {
-      //   vm.btnLoading = false
-      //   const userInfo = {
-      //     userName: vm.form.userName,
-      //     userPic: 'https://dss1.bdstatic.com/70cFvXSh_Q1YnxGkpoWK1HF6hhy/it/u=1091405991,859863778&fm=26&gp=0.jpg',
-      //     name: '张三'
-      //   }
-      //   // this.$store.commit('permissionList', [菜单数组])
-      //   sessionStorage.setItem('userInfo', JSON.stringify(userInfo))
-      //   vm.$router.push({path: DEFAULT_ROUTER})
-      // }, () => {
-      //   vm.btnLoading = false
-      // })
-      setTimeout(() => {
-        const userInfo = {
-          userName: vm.form.userName,
-          userPic: 'https://dss1.bdstatic.com/70cFvXSh_Q1YnxGkpoWK1HF6hhy/it/u=1091405991,859863778&fm=26&gp=0.jpg',
-          name: '张三'
-        }
-        sessionStorage.setItem('userInfo', JSON.stringify(userInfo))
-
-        vm.$router.push({path: DEFAULT_ROUTER})
+      this.$post('/user/login', vm.form).then((res) => {
         vm.btnLoading = false
-      }, 1000)
+        const userInfo = JSON.parse(res.data.result)
+        // const userInfo = {
+        //   userName: vm.form.userName,
+        //   userPic: 'https://dss1.bdstatic.com/70cFvXSh_Q1YnxGkpoWK1HF6hhy/it/u=1091405991,859863778&fm=26&gp=0.jpg',
+        //   name: '张三'
+        // }
+        // 后台返回用户账号信息存入session
+        sessionStorage.setItem('userInfo', JSON.stringify(userInfo))
+        // 页面跳转
+        vm.$router.push({path: DEFAULT_ROUTER})
+      }, () => {
+        vm.btnLoading = false
+      })
     }
   }
 }
