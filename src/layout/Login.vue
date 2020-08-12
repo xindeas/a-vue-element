@@ -85,21 +85,28 @@ export default {
       }
       vm.btnLoading = true
 
-      this.$post('/user/login', vm.form).then((res) => {
-        vm.btnLoading = false
-        const userInfo = JSON.parse(res.data.result)
-        // const userInfo = {
-        //   userName: vm.form.userName,
-        //   userPic: 'https://dss1.bdstatic.com/70cFvXSh_Q1YnxGkpoWK1HF6hhy/it/u=1091405991,859863778&fm=26&gp=0.jpg',
-        //   name: '张三'
-        // }
+      setTimeout(() => {
+        const userInfo = {
+          userName: vm.form.userName,
+          userPic: 'https://dss1.bdstatic.com/70cFvXSh_Q1YnxGkpoWK1HF6hhy/it/u=1091405991,859863778&fm=26&gp=0.jpg',
+          name: '张三'
+        }
         // 后台返回用户账号信息存入session
         sessionStorage.setItem('userInfo', JSON.stringify(userInfo))
         // 页面跳转
         vm.$router.push({path: DEFAULT_ROUTER})
-      }, () => {
         vm.btnLoading = false
-      })
+      }, 1000)
+      // this.$post('/user/login', vm.form).then((res) => {
+      //   vm.btnLoading = false
+      //   const userInfo = JSON.parse(res.data.result)
+      //   // 后台返回用户账号信息存入session
+      //   sessionStorage.setItem('userInfo', JSON.stringify(userInfo))
+      //   // 页面跳转
+      //   vm.$router.push({path: DEFAULT_ROUTER})
+      // }, () => {
+      //   vm.btnLoading = false
+      // })
     }
   }
 }
