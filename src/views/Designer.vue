@@ -1,5 +1,5 @@
 <template>
-    <div class="designer">
+    <div class="designer" ref="designer">
       <el-form ref="form" :model="form" :rules="rules" label-width="auto" :size="form.DEFAULT_COMP_SIZE">
         <el-alert
           title="本配置中所有路由、菜单的路径配置均是存在'@/views/'目录之下，如有特殊要求可以修改‘基础配置’下的‘菜单页面存放目录’一项"
@@ -342,10 +342,13 @@ export default {
     }
   },
   mounted: function () {
-    this.guide()
+    this.$nextTick(() => {
+      this.guide()
+    })
   },
   methods: {
     guide: function () {
+      this.$refs.designer.scrollTop = this.$refs.designer.scrollHeight
       introJs().setOptions({
         prevLabel: '上一步',
         nextLabel: '下一步',
