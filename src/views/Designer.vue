@@ -185,7 +185,7 @@
                 <span>右上角头像下拉菜单</span>
               </div>
               <el-alert
-                title="这些标签无法被关闭并且常驻标签栏，至少需要保留一个固定标签"
+                title="使用的组件是element-ui的dropdownlist，指令对应command属性，具体操作前往'@/layout/TopBar/TopBar.vue'修改"
                 type="info"
                 :closable="false"
                 show-icon>

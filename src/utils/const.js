@@ -65,8 +65,15 @@ export const MENU_LIST = [
     ]
   },
   {
-    label: '设计器',
+    label: '仪表盘',
     id: '2',
+    icon: 'el-icon-s-order',
+    path: '/ChartsDemo',
+    paths: '仪表盘'
+  },
+  {
+    label: '设计器',
+    id: '3',
     icon: 'el-icon-s-order',
     path: '/Designer',
     paths: '设计器'
