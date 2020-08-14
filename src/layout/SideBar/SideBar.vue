@@ -1,5 +1,5 @@
 <template>
-<!--  <transition name="el-zoom-in-left">-->
+  <transition name="el-fade-in-linear">
     <el-menu
       default-active="2"
       :collapse="isCollapse"
@@ -13,7 +13,7 @@
         <SideBarItem :key="index" :form-item="item"></SideBarItem>
       </template>
     </el-menu>
-<!--  </transition>-->
+  </transition>
 </template>
 
 <script>
