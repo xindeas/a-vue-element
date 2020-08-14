@@ -1,11 +1,11 @@
 <template>
-  <transition name="el-zoom-in-left">
+<!--  <transition name="el-zoom-in-left">-->
     <el-menu
       default-active="2"
       :collapse="isCollapse"
       class="el-menu-vertical-demo"
       unique-opened>
-      <div :class="logoClass" @click="openDefaultTab">
+      <div class="sys-logo" @click="openDefaultTab">
         <img src="@/assets/img/logo.png"/>
         <span v-if="!isCollapse">{{sysName}}</span>
       </div>
@@ -13,7 +13,7 @@
         <SideBarItem :key="index" :form-item="item"></SideBarItem>
       </template>
     </el-menu>
-  </transition>
+<!--  </transition>-->
 </template>
 
 <script>
@@ -42,12 +42,6 @@ export default {
     }
   },
   computed: {
-    logoClass: function () {
-      return {
-        'sys-logo': true,
-        'sys-logo-center': this.isCollapse
-      }
-    },
     menuList: function () {
       return this.$store.state.permissionList
     }
@@ -69,6 +63,7 @@ export default {
   }
   .sys-logo {
     height: 4em;
+    text-align: center;
     cursor: pointer;
   }
   .sys-logo:after {
@@ -76,9 +71,6 @@ export default {
     height: 100%;
     display: inline-block;
     vertical-align: middle;
-  }
-  .sys-logo-center {
-    text-align: center;
   }
   .sys-logo img {
     width: 50px;
