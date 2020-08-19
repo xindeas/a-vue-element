@@ -1,24 +1,28 @@
 <template>
   <div class="charts-demo">
-    <el-row :gutter="20">
+    <el-row :gutter="20" class="digit-row">
       <el-col :span="6">
         <div class="num-pad bak-info">
-          <div class="item-title">100</div>
+          <div class="item-title">今日订单数</div>
+          <div class="item-digit">100</div>
         </div>
       </el-col>
       <el-col :span="6">
         <div class="num-pad bak-info">
-          <div class="item-title">100</div>
+          <div class="item-title">今日发货数</div>
+          <div class="item-digit">100</div>
         </div>
       </el-col>
       <el-col :span="6">
         <div class="num-pad bak-info">
-          <div class="item-title">100</div>
+          <div class="item-title">今日退货数</div>
+          <div class="item-digit">100</div>
         </div>
       </el-col>
       <el-col :span="6">
         <div class="num-pad bak-info">
-          <div class="item-title">100</div>
+          <div class="item-title">今日入库数</div>
+          <div class="item-digit">100</div>
         </div>
       </el-col>
     </el-row>
@@ -169,12 +173,18 @@ export default {
     width: 100%;
     height: 300px;
   }
+  .digit-row {
+    margin-bottom: 1em;
+  }
   .num-pad {
     width: 100%;
-    height: 100px;
+    min-height: 100px;
     border-radius: 10px;
     color: white;
     font-weight: bold;
+    display: flex;
+    align-items: center;
+    text-align: center;
   }
   .num-pad:after {
     content: '';
@@ -183,9 +193,12 @@ export default {
     vertical-align: middle;
   }
   .item-title {
-    display: inline-block;
-    vertical-align: middle;
     font-size: 1.5em;
+    width: 50%;
+  }
+  .item-digit {
+    font-size: 1.5em;
+    width: 50%;
   }
 
   .bak-info {

@@ -43,7 +43,8 @@ export default {
     tabClass: function () {
       return {
         'tab-item': true,
-        'cur-tab': this.item.path === this.curRouter
+        'cur-tab': this.item.path === this.curRouter,
+        'un-close-able': !this.closeAble
       }
     }
   },

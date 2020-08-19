@@ -1,5 +1,5 @@
 <template>
-    <draggable v-model="recentRouters" class="tabs-bar">
+    <draggable v-model="recentRouters" class="tabs-bar" :move="checkMove" filter=".un-close-able">
       <template v-for="(item, index) in recentRouters">
         <TabsBarItem :key="index" :item="item"></TabsBarItem>
       </template>
@@ -33,6 +33,14 @@ export default {
       for (let item of arr) {
         addRouters(item)
       }
+    }
+  },
+  methods: {
+    checkMove: function (evt, originalEvent) {
+      if (evt.draggedContext.futureIndex === 0) {
+        return false
+      }
+      return true
     }
   }
 }
