@@ -90,6 +90,6 @@ export default {
     border-left: 1px solid #e4e7ed;
     border-right: 1px solid #e4e7ed;
     border-bottom: 1px solid transparent;
-    color: #409eff;
+    color: #008037;
   }
 </style>

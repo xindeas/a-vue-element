@@ -17,4 +17,10 @@ export default {
     font-family: Font002;
     src: url(./assets/font/wei.otf)
   }
+  .primary-color {
+    color: #008037;
+  }
+  .active-color {
+    color: #67C23A;
+  }
 </style>

@@ -4,6 +4,9 @@
       default-active="2"
       :collapse="isCollapse"
       class="el-menu-vertical-demo"
+      background-color="#545c64"
+      text-color="#fff"
+      active-text-color="#67C23A"
       unique-opened>
       <div class="sys-logo" @click="openDefaultTab">
         <img src="@/assets/img/logo.png"/>
@@ -65,6 +68,7 @@ export default {
     height: 4em;
     text-align: center;
     cursor: pointer;
+    color: white;
   }
   .sys-logo:after {
     content: '';
@@ -73,8 +77,8 @@ export default {
     vertical-align: middle;
   }
   .sys-logo img {
-    width: 50px;
-    height: 50px;
+    width: 2em;
+    height: 2em;
     display: inline-block;
     vertical-align: middle;
     border-radius: 50%;
