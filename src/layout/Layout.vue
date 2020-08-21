@@ -22,10 +22,6 @@ export default {
     FooterBar,
     MainContent
   },
-  data: function () {
-    return {
-    }
-  },
   computed: {
     isCollapse: function () {
       return this.$store.state.menuCollapse

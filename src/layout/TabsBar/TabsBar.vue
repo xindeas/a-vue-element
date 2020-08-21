@@ -7,7 +7,6 @@
 </template>
 
 <script>
-import { addRouters } from '@/utils/util.js'
 import draggable from 'vuedraggable'
 import TabsBarItem from './TabsBarItem'
 export default {
@@ -23,15 +22,6 @@ export default {
       },
       get: function () {
         return this.$store.state.recentRouters
-      }
-    }
-  },
-  mounted: function () {
-    // 加载固定标签
-    const arr = this.recentRouters.filter(item => item.path === this.curRouter)
-    if (arr.length > 0) {
-      for (let item of arr) {
-        addRouters(item)
       }
     }
   },

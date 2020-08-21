@@ -50,6 +50,7 @@ router.beforeEach((to, from, next) => {
     // 此处访问后台获取权限，返回值存放至store.permissionList
     store.commit('permissionList', MENU_LIST)
     addMenuList()
+    // next(to)会递归调用自身，利用这点实现刷新页面后加载最后打开的标签并展示在标签栏上
     next(to)
   } else {
     if (userInfo || to.path === '/Login') {
@@ -60,6 +61,7 @@ router.beforeEach((to, from, next) => {
         }
         addWithoutPush(item)
       }
+      // 此处不能使用next(to)否则递归调用自身会陷入死循环
       next()
     } else {
       next({path: '/Login'})
