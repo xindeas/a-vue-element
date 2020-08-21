@@ -81,6 +81,24 @@ export function getHelloText () {
     return '你好'
   }
 }
+
+// 根据路由路径获取对应的菜单id
+export function getCurRouteId (path, arr) {
+  let result = -1
+  for (const item of arr) {
+    if (path === item.path) {
+      result = item.id
+      break
+    }
+    if (item.children && item.children.length > 0) {
+      result = getCurRouteId(path, item.children)
+    }
+    if (result > -1) {
+      break
+    }
+  }
+  return result
+}
 /** ===============内部私有函数================== **/
 // 取得叶子节点
 function getLeafData (data) {

@@ -46,9 +46,6 @@ export default {
       default: false
     }
   },
-  data: function () {
-    return {}
-  },
   methods: {
     openTab: function () {
       addRouters(this.formItem)

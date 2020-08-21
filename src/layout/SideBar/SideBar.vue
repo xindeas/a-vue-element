@@ -1,7 +1,7 @@
 <template>
   <transition name="el-fade-in-linear">
     <el-menu
-      default-active="2"
+      :default-active="defaultActive"
       :collapse="isCollapse"
       class="el-menu-vertical-demo"
       background-color="#545c64"
@@ -25,7 +25,7 @@ import {
 } from 'element-ui'
 import SideBarItem from './SideBarItem'
 import { SYS_NAME, DEFAULT_ROUTER_ITEM } from '@/utils/const.js'
-import { addRouters } from '@/utils/util.js'
+import { addRouters, getCurRouteId } from '@/utils/util.js'
 export default {
   name: 'SideBar',
   components: {
@@ -47,12 +47,18 @@ export default {
   computed: {
     menuList: function () {
       return this.$store.state.permissionList
+    },
+    curRouter: function () {
+      return this.$store.state.curRouter
+    },
+    defaultActive: function () {
+      return getCurRouteId(this.curRouter, this.menuList)
     }
   },
+  mounted: function () {
+    console.log(this.curRouter)
+  },
   methods: {
-    handleSelect: function (key, keyPath) {
-      console.log(key, keyPath)
-    },
     openDefaultTab: function () {
       addRouters(DEFAULT_ROUTER_ITEM)
     }
