@@ -55,9 +55,6 @@ export default {
       return getCurRouteId(this.curRouter, this.menuList)
     }
   },
-  mounted: function () {
-    console.log(this.curRouter)
-  },
   methods: {
     openDefaultTab: function () {
       addRouters(DEFAULT_ROUTER_ITEM)

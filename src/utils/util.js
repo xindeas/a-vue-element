@@ -36,16 +36,25 @@ export function delRouters (routeItem) {
   // 截取最后n个
   recentRouters = recentRouters.splice(-maxTabNum, maxTabNum)
   recentRouters = DEFAULT_RECENT_ROUTERS.concat(recentRouters)
-  let curRouter = {}
-  if (recentRouters.length > 0) {
-    curRouter = recentRouters[recentRouters.length - 1]
+  // 现在打开的页面
+  let curPath = store.state.curRouter
+  const index = recentRouters.findIndex(item => item.path === curPath)
+  if (index >= 0) {
+    // 当前打开的页面没有被关闭
+    store.commit('recentRouters', recentRouters)
   } else {
-    curRouter = DEFAULT_ROUTER_ITEM
-    recentRouters = [curRouter]
+    // 当前打开的页面被关闭
+    let curRouter = {}
+    if (recentRouters.length > 0) {
+      curRouter = recentRouters[recentRouters.length - 1]
+    } else {
+      curRouter = DEFAULT_ROUTER_ITEM
+      recentRouters = [curRouter]
+    }
+    store.commit('curRouter', curRouter.path)
+    store.commit('recentRouters', recentRouters)
+    router.push(curRouter)
   }
-  store.commit('curRouter', curRouter.path)
-  store.commit('recentRouters', recentRouters)
-  router.push(curRouter)
 }
 
 // 把整个菜单列表加入路由
@@ -84,7 +93,7 @@ export function getHelloText () {
 
 // 根据路由路径获取对应的菜单id
 export function getCurRouteId (path, arr) {
-  let result = -1
+  let result = '-1'
   for (const item of arr) {
     if (path === item.path) {
       result = item.id
@@ -93,7 +102,7 @@ export function getCurRouteId (path, arr) {
     if (item.children && item.children.length > 0) {
       result = getCurRouteId(path, item.children)
     }
-    if (result > -1) {
+    if (result !== '-1') {
       break
     }
   }
