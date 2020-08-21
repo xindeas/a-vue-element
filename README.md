@@ -27,3 +27,14 @@ npm run build
 <button style="background: #F0F9EB;color: #67c23a;border-radius: 5px;border: 1px solid #c2e7b0;">导出</button>
 将配置信息粘贴<strong>覆盖</strong>至<i>'src/utils/const.js'</i>文件。
 </p>
+
+## 目录结构
+src－－<br/>
+　　　｜－assets: 静态资源<br/>
+　　　｜－base: 基础页面（视情况而定，可有可无）<br/>
+　　　｜－components: 自定义组件<br/>
+　　　｜－layout: 页面布局<br/>
+　　　｜－router: 路由<br/>
+　　　｜－store: 状态管理<br/>
+　　　｜－utils: 工具，配置文件const.js也在这里<br/>
+　　　｜－views: 菜单页面，菜单路由默认读取的目录<br/>
