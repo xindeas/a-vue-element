@@ -31,7 +31,15 @@ export default {
   props: {
     formItem: {
       type: Object,
-      default: () => { return {} }
+      default: () => {
+        return {
+          id: '', // 唯一键
+          label: '', // 菜单名称
+          path: '', // 路径
+          icon: '', // class图标
+          children: [] // 子节点
+        }
+      }
     },
     appendToBody: {
       type: Boolean,
