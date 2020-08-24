@@ -40,7 +40,6 @@ export default {
   },
   data: function () {
     return {
-      activeIndex: '1',
       sysName: SYS_NAME
     }
   },

@@ -27,10 +27,7 @@ export default {
   },
   methods: {
     checkMove: function (evt, originalEvent) {
-      if (evt.draggedContext.futureIndex === 0) {
-        return false
-      }
-      return true
+      return evt.draggedContext.futureIndex !== 0
     }
   }
 }
