@@ -112,11 +112,11 @@ export default {
 }
 </script>
 
-<style scoped>
+<style scoped lang="scss">
   .content {
     width: 100%;
     height: 100%;
-    background-image: url('../assets/img/login-bg.png');
+    background-image: url('../assets/img/bak.jpg');
     background-position: center center;
     background-size: cover;
     display: flex;
@@ -126,7 +126,7 @@ export default {
   }
 
   .form-content {
-    background: rgba(0, 0, 0, 0.5);
+    background: rgba(0, 0, 0, 0.7);
     border-radius: 5px;
     padding: 2em;
     width: 18em;

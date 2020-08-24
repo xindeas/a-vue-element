@@ -6,7 +6,6 @@
       class="el-menu-vertical-demo"
       background-color="#545c64"
       text-color="#fff"
-      active-text-color="#67C23A"
       unique-opened>
       <div class="sys-logo" @click="openDefaultTab">
         <img src="@/assets/img/logo.png"/>

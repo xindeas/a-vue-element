@@ -17,7 +17,8 @@ export default {
 }
 </script>
 
-<style scoped>
+<style scoped lang="scss">
+  @import 'src/assets/css/theme-variable';
   .logo-cotent {
     display: inline-block;
     vertical-align: middle;
@@ -41,7 +42,7 @@ export default {
   }
   .logo {
     border-radius: 50%;
-    background: #b3d8ff;
+    background: $--color-primary;
     width: 12em;
     height: 12em;
     position: relative;

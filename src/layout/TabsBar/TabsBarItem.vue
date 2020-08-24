@@ -59,7 +59,8 @@ export default {
 }
 </script>
 
-<style scoped>
+<style scoped lang="scss">
+  @import 'src/assets/css/theme-variable';
   .tab-item {
     display: inline-block;
     height: 100%;
@@ -90,6 +91,7 @@ export default {
     border-left: 1px solid #e4e7ed;
     border-right: 1px solid #e4e7ed;
     border-bottom: 1px solid transparent;
-    color: #008037;
+    color: $--color-primary;
+    font-weight: bold;
   }
 </style>
