@@ -139,7 +139,7 @@ export default {
     font-family: Font001;
   }
   .form-footer {
-    color: #999;
+    color: #999999;
     text-align: center;
     margin-top: 1em;
     font-family: Font002;
