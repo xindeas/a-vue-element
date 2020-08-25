@@ -10,7 +10,7 @@
           </el-form-item>
           <el-form-item prop="password">
 <!--            <label slot="label">密码</label>-->
-            <el-input type="password" prefix-icon="el-icon-lock" v-model="form.password" placeholder="密码" show-password></el-input>
+            <el-input type="password" prefix-icon="el-icon-lock" v-model="form.password" placeholder="密码" @keyup.enter.native="login" show-password></el-input>
           </el-form-item>
         </el-form>
         <div class="oper-bar">

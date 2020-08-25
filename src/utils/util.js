@@ -60,10 +60,12 @@ export function delRouters (routeItem) {
 // 把整个菜单列表加入路由
 export function addMenuList () {
   const menuList = store.state.permissionList
+  const otherRouterList = store.state.otherRouterList
   const recentRouters = store.state.recentRouters
   let result = []
   result = result.concat(getLeafData(recentRouters))
   result = result.concat(getLeafData(menuList))
+  result = result.concat(getLeafData(otherRouterList))
   const data = [{
     path: '/Layout',
     component: resolve => require(['@/layout/Layout'], resolve),

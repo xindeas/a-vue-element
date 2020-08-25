@@ -70,6 +70,7 @@ export default {
     color: #909399;
     border-left: 1px solid transparent;
     border-right: 1px solid transparent;
+    border-radius: 5px 5px 0 0;
   }
   .tab-item:after {
     content: '';

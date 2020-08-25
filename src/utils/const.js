@@ -79,6 +79,19 @@ export const MENU_LIST = [
     paths: '设计器'
   }
 ]
+
+// 不展示在菜单中但是又希望通过路由访问的页面
+export const OTHER_ROUTER_LIST = [
+  // {
+  //   label: 标签,菜单名
+  //   path: 路径,以/开头,非叶子可以没有值
+  //   paths: 打开路径,以逗号分隔
+  // }
+  {
+    label: '个人主页',
+    path: '/Profile'
+  }
+]
 /** ===============用户菜单配置================== **/
 // 右上角用户头像下拉菜单
 export const USER_INFO_DROPDOWN = [
@@ -89,7 +102,7 @@ export const USER_INFO_DROPDOWN = [
   //   style: 自定义样式
   // }
   {
-    command: 'mypage',
+    command: 'profile',
     label: '个人主页'
   },
   {

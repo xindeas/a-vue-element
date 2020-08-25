@@ -4,7 +4,7 @@ import NProgress from 'nprogress'
 import 'nprogress/nprogress.css'
 import store from '@/store/store.js'
 import { addWithoutPush, addMenuList } from '@/utils/util.js'
-import { MENU_LIST } from '@/utils/const.js'
+import { MENU_LIST, OTHER_ROUTER_LIST } from '@/utils/const.js'
 
 Vue.use(Router)
 
@@ -49,6 +49,8 @@ router.beforeEach((to, from, next) => {
   if ((!permissionList || permissionList.length <= 0) && userInfo) {
     // 此处访问后台获取权限，返回值存放至store.permissionList
     store.commit('permissionList', MENU_LIST)
+    // 根据需求决定是写死还是从后台取数据，通常情况写死
+    store.commit('otherRouterList', OTHER_ROUTER_LIST)
     addMenuList()
     // next(to)会递归调用自身，利用这点实现刷新页面后加载最后打开的标签并展示在标签栏上
     next(to)

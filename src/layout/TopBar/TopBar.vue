@@ -96,8 +96,8 @@ export default {
           // 跳转
           this.$router.push('/Login')
           break
-        case 'mypage':
-          console.log(command)
+        case 'profile':
+          this.$router.push('/Profile')
           break
         case 'myxxx':
           console.log(command)

@@ -16,6 +16,8 @@ export default new vuex.Store({
     recentRouters: JSON.parse(JSON.stringify(DEFAULT_RECENT_ROUTERS)),
     // 菜单权限列表
     permissionList: [],
+    // 不展示在菜单中但是又希望通过路由访问的页面
+    otherRouterList: [],
     // 面包屑
     breadcrumb: []
   },
@@ -34,6 +36,9 @@ export default new vuex.Store({
     },
     permissionList (state, val) {
       state.permissionList = val
+    },
+    otherRouterList (state, val) {
+      state.otherRouterList = val
     },
     breadcrumb (state, val) {
       state.breadcrumb = val

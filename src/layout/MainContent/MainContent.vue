@@ -26,4 +26,10 @@ export default {
     background-color: #f5f7fa;
     border: 1px solid #e4e7ed;
   }
+  .tabs-bar:after {
+    content: '';
+    height: 100%;
+    display: inline-block;
+    vertical-align: middle;
+  }
 </style>
