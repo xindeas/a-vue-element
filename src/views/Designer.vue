@@ -1,5 +1,5 @@
 <template>
-    <div class="designer" ref="designer">
+    <div class="designer view-content" ref="designer">
       <el-steps :active="active" finish-status="finish" process-status="process">
         <template v-for="(item, index) in stepList">
           <el-step :title="item" :key="index" @click.native="handleStepClick(index)" style="cursor: pointer"></el-step>
@@ -537,10 +537,6 @@ export default {
 
 <style scoped>
   .designer {
-    width: 100%;
-    height: 100%;
-    box-sizing: border-box;
-    padding: 1em;
     position: relative;
   }
   .designer .form-content {

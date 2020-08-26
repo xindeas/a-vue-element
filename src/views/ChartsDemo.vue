@@ -1,5 +1,5 @@
 <template>
-  <div class="charts-demo">
+  <div class="charts-demo view-content">
     <el-row :gutter="20" class="digit-row">
       <el-col :span="6">
         <div class="num-pad bak-info">
@@ -162,11 +162,7 @@ export default {
 
 <style scoped>
   .charts-demo {
-    width: 100%;
-    height: 100%;
     overflow-y: auto;
-    box-sizing: border-box;
-    padding: 1em;
   }
 
   .demo-item {

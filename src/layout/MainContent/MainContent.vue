@@ -2,7 +2,9 @@
     <div class="main-content">
       <TabsBar></TabsBar>
       <div class="my-content">
-        <router-view></router-view>
+        <keep-alive :include="include">
+          <router-view></router-view>
+        </keep-alive>
       </div>
     </div>
 </template>
@@ -11,7 +13,16 @@
 import TabsBar from '../TabsBar/TabsBar'
 export default {
   name: 'MainContent',
-  components: {TabsBar}
+  components: {TabsBar},
+  computed: {
+    include: function () {
+      const recentRouters = this.$store.state.recentRouters
+      const arr = recentRouters.map(item => {
+        return item.path.startsWith('/') ? item.path.substring(1) : item.path
+      })
+      return arr
+    }
+  }
 }
 </script>
 

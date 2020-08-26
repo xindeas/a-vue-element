@@ -21,4 +21,10 @@ export default {
   #nprogress .bar {
     background: $--color-primary !important;
   }
+  .view-content {
+    width: 100%;
+    height: 100%;
+    box-sizing: border-box;
+    padding: 1em;
+  }
 </style>

@@ -1,5 +1,5 @@
 <template>
-<div class="logo-cotent">
+<div class="logo-cotent view-content">
   <div class="lg">
     <div class="logo">
       <div class="font001 chen">沉</div>
@@ -23,11 +23,7 @@ export default {
     display: inline-block;
     vertical-align: middle;
     text-align: center;
-    width: 100%;
-    height: 100%;
     overflow-y: auto;
-    box-sizing: border-box;
-    padding: 1em;
   }
   .logo-cotent:after {
     content: '';
