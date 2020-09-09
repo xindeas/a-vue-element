@@ -4,9 +4,11 @@
     <div class="top-bar-left">
       <i :class="btnClass" @click="clp"></i>
       <el-breadcrumb separator="/">
+        <transition-group name="breadcrumb">
         <template v-for="(item, index) in breadcrumb">
           <el-breadcrumb-item :key="index" v-if="item">{{item}}</el-breadcrumb-item>
         </template>
+        </transition-group>
       </el-breadcrumb>
     </div>
     <div class="top-bar-right">
@@ -157,5 +159,25 @@ export default {
   .top-bar-right .hello-text {
     display: inline-block;
     margin-right: 1em;
+  }
+
+  /* breadcrumb transition */
+  .breadcrumb-enter-active,
+  .breadcrumb-leave-active {
+    transition: all .5s;
+  }
+
+  .breadcrumb-enter,
+  .breadcrumb-leave-active {
+    opacity: 0;
+    transform: translateX(20px);
+  }
+
+  .breadcrumb-move {
+    transition: all .5s;
+  }
+
+  .breadcrumb-leave-active {
+    position: absolute;
   }
 </style>
