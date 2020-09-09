@@ -1,8 +1,9 @@
 <template>
-  <transition name="el-fade-in-linear">
+<!--  <transition name="el-fade-in-linear">-->
     <el-menu
       :default-active="defaultActive"
       :collapse="isCollapse"
+      :collapse-transition="false"
       class="el-menu-vertical-demo"
       background-color="#545c64"
       text-color="#fff"
@@ -15,7 +16,7 @@
         <SideBarItem :key="index" :form-item="item"></SideBarItem>
       </template>
     </el-menu>
-  </transition>
+<!--  </transition>-->
 </template>
 
 <script>
