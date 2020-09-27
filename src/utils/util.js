@@ -37,7 +37,7 @@ export function delRouters (routeItem) {
   recentRouters = recentRouters.splice(-maxTabNum, maxTabNum)
   recentRouters = DEFAULT_RECENT_ROUTERS.concat(recentRouters)
   // 现在打开的页面
-  let curPath = store.state.curRouter
+  const curPath = store.state.curRouter
   const index = recentRouters.findIndex(item => item.path === curPath)
   if (index >= 0) {
     // 当前打开的页面没有被关闭
@@ -114,13 +114,13 @@ export function getCurRouteId (path, arr) {
 // 取得叶子节点
 function getLeafData (data) {
   let result = []
-  for (let item of data) {
+  for (const item of data) {
     let basePath = VIEW_PATH.startsWith('/') ? VIEW_PATH.slice(1, VIEW_PATH.length) : VIEW_PATH
     basePath = basePath.endsWith('/') ? basePath.slice(0, basePath.length - 1) : basePath
     if (item.children && item.children.length > 0) {
       result = result.concat(getLeafData(item.children))
     } else {
-      let path = item.path.startsWith('/') ? item.path : '/' + item.path
+      const path = item.path.startsWith('/') ? item.path : '/' + item.path
       const pathArr = path.split('/')
       const name = pathArr[pathArr.length - 1]
       const data = {

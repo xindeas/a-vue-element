@@ -57,7 +57,7 @@ router.beforeEach((to, from, next) => {
   } else {
     if (userInfo || to.path === '/Login') {
       if (to.meta.label) {
-        let item = {
+        const item = {
           label: to.meta.label,
           path: to.path
         }
@@ -66,7 +66,7 @@ router.beforeEach((to, from, next) => {
       // 此处不能使用next(to)否则递归调用自身会陷入死循环
       next()
     } else {
-      next({path: '/Login'})
+      next({ path: '/Login' })
     }
   }
 })

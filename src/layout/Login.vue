@@ -61,8 +61,8 @@ export default {
         autoLogin: false
       },
       rules: {
-        userName: [{required: true, message: '账号不能为空', trigger: 'change'}],
-        password: [{required: true, message: '密码不能为空', trigger: 'change'}]
+        userName: [{ required: true, message: '账号不能为空', trigger: 'change' }],
+        password: [{ required: true, message: '密码不能为空', trigger: 'change' }]
       },
       btnLoading: false
     }
@@ -94,7 +94,7 @@ export default {
         // 后台返回用户账号信息存入session
         sessionStorage.setItem('userInfo', JSON.stringify(userInfo))
         // 页面跳转
-        vm.$router.push({path: DEFAULT_ROUTER})
+        vm.$router.push({ path: DEFAULT_ROUTER })
         vm.btnLoading = false
       }, 1000)
       // this.$post('/user/login', vm.form).then((res) => {

@@ -16,7 +16,6 @@
 
 <script>
 import {
-  Menu,
   MenuItem,
   Submenu
 } from 'element-ui'
@@ -24,7 +23,6 @@ import { addRouters } from '@/utils/util.js'
 export default {
   name: 'SideBarItem',
   components: {
-    'el-menu': Menu,
     'el-menu-item': MenuItem,
     'el-submenu': Submenu
   },

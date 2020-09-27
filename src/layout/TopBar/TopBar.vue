@@ -32,7 +32,6 @@
 
 <script>
 import {
-  Button,
   Avatar,
   Dropdown,
   DropdownItem,
@@ -45,7 +44,6 @@ import { getHelloText } from '@/utils/util.js'
 export default {
   name: 'TopBar',
   components: {
-    'el-button': Button,
     'el-avatar': Avatar,
     'el-dropdown': Dropdown,
     'el-dropdown-item': DropdownItem,

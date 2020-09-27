@@ -13,7 +13,7 @@
 import TabsBar from '../TabsBar/TabsBar'
 export default {
   name: 'MainContent',
-  components: {TabsBar},
+  components: { TabsBar },
   computed: {
     include: function () {
       const recentRouters = this.$store.state.recentRouters

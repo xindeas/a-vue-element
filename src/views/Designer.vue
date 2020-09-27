@@ -350,7 +350,6 @@ import {
   InputNumber,
   Option,
   Popconfirm,
-  Popover,
   Row,
   Select,
   Switch,
@@ -381,7 +380,6 @@ export default {
     'el-card': Card,
     'el-alert': Alert,
     'el-popconfirm': Popconfirm,
-    'el-popover': Popover,
     'el-table': Table,
     'el-table-column': TableColumn,
     'el-collapse-transition': CollapseTransition,
@@ -394,8 +392,8 @@ export default {
   },
   computed: {
     rules: function () {
-      let rules = {}
-      for (let item in this.form) {
+      const rules = {}
+      for (const item in this.form) {
         rules[item] = [{
           required: true, message: '不能为空', trigger: 'change'
         }]
@@ -456,7 +454,7 @@ export default {
     },
     resetData: function () {
       const data = this.defaultData()
-      for (let key in data) {
+      for (const key in data) {
         this[key] = data[key]
       }
     },
@@ -469,7 +467,7 @@ export default {
           confirmButtonText: '确定'
         })
       }
-      let data = {
+      const data = {
         label: '新增节点',
         path: 'newNode',
         id: 'newNode',
@@ -506,7 +504,7 @@ export default {
       this.form.DEFAULT_ROUTER = this.form.DEFAULT_RECENT_ROUTERS[0].path
       this.form.DEFAULT_ROUTER_ITEM = this.form.DEFAULT_RECENT_ROUTERS[0]
       let text = ''
-      for (let item of Object.keys(this.form)) {
+      for (const item of Object.keys(this.form)) {
         text += 'export const ' + item + ' = '
         if (typeof this.form[item] === 'string') {
           text += "'" + this.form[item] + "'"
@@ -517,13 +515,13 @@ export default {
         }
         text += '\n'
       }
-      text = text.replace(/"/g, `'`)
-      text = text.replace(/,{/g, `, {`)
-      text = text.replace(/,\[/g, `, [`)
-      text = text.replace(/,'/g, `, '`)
-      text = text.replace(/:/g, `: `)
+      text = text.replace(/"/g, '\'')
+      text = text.replace(/,{/g, ', {')
+      text = text.replace(/,\[/g, ', [')
+      text = text.replace(/,'/g, ', \'')
+      text = text.replace(/:/g, ': ')
       this.$copyText(text).then(function (e) {
-        vm.$msgbox.alert(`复制成功,请将内容粘贴覆盖至'@/utils/const.js'`, '提示')
+        vm.$msgbox.alert('复制成功,请将内容粘贴覆盖至\'@/utils/const.js\'', '提示')
       }, function (e) {
         vm.$notify.error({
           title: '提示',
