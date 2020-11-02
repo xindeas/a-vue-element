@@ -1,5 +1,6 @@
 <template>
   <div class="content">
+    <button @click="test">点击下载</button>
     <SideBar :class="sideBarClass" :isCollapse="isCollapse"></SideBar>
     <div class="main-layout">
       <TopBar></TopBar>
@@ -32,6 +33,15 @@ export default {
         'side-bar-width': !this.isCollapse
       }
     }
+  },
+  methods: {
+    test () {
+      this.$get('https://www.baidu.com/img/flexible/logo/pc/result.png').then(res => {
+        console.log(res)
+      })
+    }
+  },
+  mounted () {
   }
 }
 </script>
